@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: ./backend
+    container_name: backend_service
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_service
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_service
+    ports:
+      - "27017:27017"
